@@ -21,10 +21,10 @@ var monthly_rate = 0;
 $("#addEmployee").on("click", function() {
 
 
-    name = $('#nameinput').val().trim();
-    empRole = $('#empRole').val().trim();
-    startDate = $('#startDate').val();
-    monthly_rate = $('#monthly_rate').val().trim();
+    name = $('#employeeName').val().trim();
+    empRole = $('#employeeRole').val().trim();
+    startDate = $('#employeeStartDate').val();
+    monthly_rate = $('#employeeMonthlyRate').val().trim();
 
     database.ref().push({
         employeeName: name,
