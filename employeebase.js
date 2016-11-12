@@ -6,32 +6,33 @@ var config = {
     storageBucket: "employee-databse.appspot.com",
     messagingSenderId: "651168611237"
 };
+
 firebase.initializeApp(config);
 
-database = firebase.database();
+var database = firebase.database();
 
-//Initial varibales
+//Initial variables
 
 var empName = "";
 var empRole = "";
-var startDate = "";
-var months_worked = "";
-var monthly_rate = 0;
+var empStartDate = "";
+var monthsWorked = "";
+var monthlyRate = 0;
 
 
 $("#submit").on("click", function() {
 
 
-    name = $('#employeeName').val().trim();
+    empName = $('#employeeName').val().trim();
     empRole = $('#employeeRole').val().trim();
-    startDate = $('#employeeStartDate').val().trim();
-    monthly_rate = $('#employeeMonthlyRate').val().trim();
+    empStartDate = $('#employeeStartDate').val().trim();
+    monthlyRate = $('#employeeMonthlyRate').val().trim();
 
     database.ref().push({
-        employeeName: name,
+        empName: empName,
         empRole: empRole,
-        empStartDate: startDate,
-        monthly_rate: monthly_rate,
+        empStartDate: empStartDate,
+        monthlyRate: monthlyRate,
         dateAdded: firebase.database.ServerValue.TIMESTAMP
 
     });
@@ -44,16 +45,16 @@ $("#submit").on("click", function() {
 database.ref().on('child_added', function(childSnapshot) {
 
     // all records after the last continue to invoke this function
-    console.log(childSnapshot.val().employeeName);
+    console.log(childSnapshot.val().empName);
     console.log(childSnapshot.val().empRole);
     console.log(childSnapshot.val().empStartDate);
-    console.log(childSnapshot.val().monthly_rate);
+    console.log(childSnapshot.val().monthlyRate);
     console.log(childSnapshot.val().dateAdded);
 
-    $('#fullMemberList').append('<tr><td>' + employeeName +
+    $('#fullMemberList').append('<tr><td>' + empName +
         '</td><td>' + empRole +
         '</td><td>' + empStartDate +
-        '</td><td>' + monthly_rate + '</td></tr>');
+        '</td><td>' + monthlyRate + '</td></tr>');
 
 
 
