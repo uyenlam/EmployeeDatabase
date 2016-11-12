@@ -15,6 +15,7 @@ database = firebase.database();
 var empName = "";
 var empRole = "";
 var startDate = "";
+var months_worked = "";
 var monthly_rate = 0;
 
 
@@ -23,7 +24,7 @@ $("#submit").on("click", function() {
 
     name = $('#employeeName').val().trim();
     empRole = $('#employeeRole').val().trim();
-    startDate = $('#employeeStartDate').val();
+    startDate = $('#employeeStartDate').val().trim();
     monthly_rate = $('#employeeMonthlyRate').val().trim();
 
     database.ref().push({
@@ -52,7 +53,7 @@ database.ref().on('child_added', function(childSnapshot) {
     $('#fullMemberList').append('<tr><td>' + employeeName +
         '</td><td>' + empRole +
         '</td><td>' + empStartDate +
-        '</td><td>' + monthly_rate + '</td>');
+        '</td><td>' + monthly_rate + '</td></tr>');
 
 
 
