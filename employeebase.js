@@ -18,7 +18,7 @@ var startDate = "";
 var monthly_rate = 0;
 
 
-$("#addEmployee").on("click", function() {
+$("#submit").on("click", function() {
 
 
     name = $('#employeeName').val().trim();
@@ -29,16 +29,31 @@ $("#addEmployee").on("click", function() {
     database.ref().push({
         employeeName: name,
         empRole: empRole,
-        empStartDate: startDate
+        empStartDate: startDate,
+        monthly_rate: monthly_rate,
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
 
     });
+    //Don't refresh the page
+    return false;
 
 })
 
 
-database.on('child_added', function(snapshot) {
+database.ref().on('child_added', function(childSnapshot) {
 
     // all records after the last continue to invoke this function
-    console.log(snapshot.val());
+    console.log(childSnapshot.val().employeeName);
+    console.log(childSnapshot.val().empRole);
+    console.log(childSnapshot.val().empStartDate);
+    console.log(childSnapshot.val().monthly_rate);
+    console.log(childSnapshot.val().dateAdded);
+
+    $('#fullMemberList').append('<tr><td>' + employeeName +
+        '</td><td>' + empRole +
+        '</td><td>' + empStartDate +
+        '</td><td>' + monthly_rate + '</td>');
+
+
 
 });
